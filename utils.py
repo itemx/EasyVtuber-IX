@@ -46,6 +46,12 @@ def preprocessing_image(image):
     torch_image = torch.from_numpy(reshaped_image).float() * 2.0 - 1
     return torch_image
 
+def blend_with_background(numpy_image, background):
+        alpha = numpy_image[:, :, 3:4] / 255
+        color = numpy_image[:, :, 0:3]
+        new_color = color * alpha + (1.0 - alpha) * background[:, :, 0:3]
+        return np.uint8(np.rint(np.concatenate([new_color, background[:, :, 3:4]], axis=2)))
+        # return np.uint8(np.rint(new_color * 255))
 
 def postprocessing_image(tensor):
     """
@@ -79,3 +85,4 @@ def get_distance(a, b):
         L2 distance (float)
     """
     return np.sqrt((a.x - b.x) ** 2 + (a.y - b.y) ** 2)
+    
