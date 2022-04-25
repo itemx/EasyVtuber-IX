@@ -146,9 +146,13 @@ def main():
                 background = np.zeros((out_img.shape[0], out_img.shape[1], out_img.shape[2]))
                 background[:, :, 3] = 255 #Alpha 255
                 if background_choice == 1: 
-                    background[:, :, 1] = 255 # G 255
+                    background[:, :, 1] = 177
+                    background[:, :, 2] = 64
+                    result_image[:,:] = [0, 177, 64]
                 elif background_choice == 2:
-                    background[:, :, 2] = 255 # B 255
+                    background[:, :, 1] = 71
+                    background[:, :, 2] = 187
+                    result_image[:,:] = [0, 71, 187]
                 elif background_choice == 4:
                     background[:, :, 0:3] = 255 # RGBA 255
                 output_frame = cv2.cvtColor(blend_with_background(out_img, background), cv2.COLOR_RGBA2BGR)
@@ -165,17 +169,18 @@ def main():
         if args.output_webcam:
             result_image = np.zeros([720, 1280, 3], dtype=np.uint8)
             out_img = postprocessing_image(output_image.cpu())
-            result_image[:,:] = [0, 255, 0] #make me green for OBS
             if background_choice != 0: # Transp
                 background = np.zeros((out_img.shape[0], out_img.shape[1], out_img.shape[2]))
                 background[:, :, 3] = 255
                 result_image[:,:] = [0, 0, 0]
                 if background_choice == 1: 
-                    background[:, :, 1] = 255
-                    result_image[:,:] = [0, 255, 0]
+                    background[:, :, 1] = 177
+                    background[:, :, 2] = 64
+                    result_image[:,:] = [0, 177, 64]
                 elif background_choice == 2:
-                    background[:, :, 2] = 255
-                    result_image[:,:] = [0, 0, 255]
+                    background[:, :, 1] = 71
+                    background[:, :, 2] = 187
+                    result_image[:,:] = [0, 71, 187]
                 elif background_choice == 4:
                     background[:, :, 0:3] = 255
                     result_image[:,:] = [255, 255, 255]
