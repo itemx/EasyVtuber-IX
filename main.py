@@ -148,11 +148,9 @@ def main():
                 if background_choice == 1: 
                     background[:, :, 1] = 177
                     background[:, :, 2] = 64
-                    result_image[:,:] = [0, 177, 64]
                 elif background_choice == 2:
                     background[:, :, 1] = 71
                     background[:, :, 2] = 187
-                    result_image[:,:] = [0, 71, 187]
                 elif background_choice == 4:
                     background[:, :, 0:3] = 255 # RGBA 255
                 output_frame = cv2.cvtColor(blend_with_background(out_img, background), cv2.COLOR_RGBA2BGR)
